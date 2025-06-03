@@ -1,0 +1,25 @@
+# Compiled class files
+*.class
+bin/
+target/
+
+# IDE files
+.idea/
+.settings/
+.classpath
+.project
+
+# Logs
+*.log
+test-output/
+
+# Screenshots
+*.png
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Windows
+Thumbs.db 
