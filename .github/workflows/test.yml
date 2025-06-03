@@ -31,13 +31,19 @@ jobs:
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
+        chromedriver --version
     
     - name: Build with Maven
-      run: mvn clean test
+      run: |
+        mvn clean test
+        echo "Test execution completed"
     
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v3
       with:
         name: test-results
-        path: target/surefire-reports/ 
+        path: |
+          target/surefire-reports/
+          target/screenshots/
+        if-no-files-found: warn 
