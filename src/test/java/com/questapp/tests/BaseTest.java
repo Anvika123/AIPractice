@@ -12,7 +12,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().driverVersion("122.0.6261.57").setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
