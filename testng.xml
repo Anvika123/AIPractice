@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="LMS Test Suite">
-    <test name="Login Tests">
+    <test name="All Tests">
         <classes>
             <class name="com.questapp.tests.LoginTest"/>
+            <class name="com.questapp.tests.BatchesPageTest"/>
+            <class name="com.questapp.tests.JobsPageTest"/>
+            <class name="com.questapp.tests.HelpPageTest"/>
+            <class name="com.questapp.tests.LibraryPageTest"/>
+            <class name="com.questapp.tests.CommunityTest"/>
         </classes>
     </test>
 </suite>
