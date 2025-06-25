@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Reloy Login Test Suite" parallel="methods" thread-count="3">
+    
+    <test name="Login Functionality Tests">
+        <classes>
+            <class name="com.automation.tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testLoginWithInvalidOtp"/>
+                    <include name="testLoginWithExpiredOtp"/>
+                    <include name="testLoginWithInvalidPhoneNumber"/>
+                    <include name="testTermsAndConditionsCheckbox"/>
+                    <include name="testOtpFieldAppearance"/>
+                    <include name="testLoginButtonEnabling"/>
+                    <include name="testResendOtpFunctionality"/>
+                    <include name="testOtpTimer"/>
+                    <include name="testCompleteLoginFlow"/>
+                    <include name="testLoginWithVariousInvalidOtps"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Smoke Tests">
+        <classes>
+            <class name="com.automation.tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testLoginWithInvalidOtp"/>
+                    <include name="testCompleteLoginFlow"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Regression Tests">
+        <classes>
+            <class name="com.automation.tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testLoginWithInvalidOtp"/>
+                    <include name="testLoginWithExpiredOtp"/>
+                    <include name="testLoginWithInvalidPhoneNumber"/>
+                    <include name="testTermsAndConditionsCheckbox"/>
+                    <include name="testOtpFieldAppearance"/>
+                    <include name="testLoginButtonEnabling"/>
+                    <include name="testResendOtpFunctionality"/>
+                    <include name="testOtpTimer"/>
+                    <include name="testCompleteLoginFlow"/>
+                    <include name="testLoginWithVariousInvalidOtps"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Parameter definitions -->
+    <parameter name="browser" value="chrome"/>
+    <parameter name="headless" value="false"/>
+    <parameter name="baseUrl" value="https://dev.loyalie.in/reloy-website"/>
+    <parameter name="implicitWait" value="10"/>
+    <parameter name="explicitWait" value="20"/>
+    <parameter name="pageLoadTimeout" value="30"/>
+    
+</suite> 
