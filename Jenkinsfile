@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         maven 'Maven-3.8.9'
-        jdk 'JDK 17'
+        jdk 'JDK-17'
     }
     
     environment {
@@ -37,9 +37,9 @@ pipeline {
                 echo 'Setting up test environment...'
                 script {
                     // Create necessary directories
-                    sh 'mkdir -p target/extent-reports'
-                    sh 'mkdir -p target/screenshots'
-                    sh 'mkdir -p target/logs'
+                    bat 'mkdir target\\extent-reports'
+                    bat 'mkdir target\\screenshots'
+                    bat 'mkdir target\\logs'
                     
                     // Set environment variables for tests
                     env.TEST_ENV = 'jenkins'
@@ -52,15 +52,15 @@ pipeline {
         stage('Dependency Resolution') {
             steps {
                 echo 'Resolving Maven dependencies...'
-                sh 'mvn dependency:resolve'
-                sh 'mvn dependency:resolve-plugins'
+                bat 'mvn dependency:resolve'
+                bat 'mvn dependency:resolve-plugins'
             }
         }
         
         stage('Compile') {
             steps {
                 echo 'Compiling source code...'
-                sh 'mvn clean compile test-compile'
+                bat 'mvn clean compile test-compile'
             }
         }
         
@@ -72,7 +72,7 @@ pipeline {
                 echo 'Running static code analysis...'
                 script {
                     // You can add tools like SonarQube, SpotBugs, etc.
-                    sh 'mvn spotbugs:check || true'
+                    bat 'mvn spotbugs:check || exit /b 0'
                 }
             }
         }
@@ -87,13 +87,13 @@ pipeline {
                         echo 'Running tests on Chrome...'
                         script {
                             env.BROWSER = 'chrome'
-                            sh '''
+                            bat """
                                 mvn test -Dtest=TestSuite \
                                 -Dbrowser=chrome \
-                                -Dheadless=${HEADLESS} \
-                                -Dparallel.threads=${PARALLEL_THREADS} \
-                                -Dextent.reporter.spark.out=${EXTENT_REPORT_PATH}chrome-report.html
-                            '''
+                                -Dheadless=%HEADLESS% \
+                                -Dparallel.threads=%PARALLEL_THREADS% \
+                                -Dextent.reporter.spark.out=%EXTENT_REPORT_PATH%chrome-report.html
+                            """
                         }
                     }
                     post {
@@ -119,13 +119,13 @@ pipeline {
                         echo 'Running tests on Firefox...'
                         script {
                             env.BROWSER = 'firefox'
-                            sh '''
+                            bat """
                                 mvn test -Dtest=TestSuite \
                                 -Dbrowser=firefox \
-                                -Dheadless=${HEADLESS} \
-                                -Dparallel.threads=${PARALLEL_THREADS} \
-                                -Dextent.reporter.spark.out=${EXTENT_REPORT_PATH}firefox-report.html
-                            '''
+                                -Dheadless=%HEADLESS% \
+                                -Dparallel.threads=%PARALLEL_THREADS% \
+                                -Dextent.reporter.spark.out=%EXTENT_REPORT_PATH%firefox-report.html
+                            """
                         }
                     }
                     post {
@@ -151,13 +151,13 @@ pipeline {
                         echo 'Running tests on Edge...'
                         script {
                             env.BROWSER = 'edge'
-                            sh '''
+                            bat """
                                 mvn test -Dtest=TestSuite \
                                 -Dbrowser=edge \
-                                -Dheadless=${HEADLESS} \
-                                -Dparallel.threads=${PARALLEL_THREADS} \
-                                -Dextent.reporter.spark.out=${EXTENT_REPORT_PATH}edge-report.html
-                            '''
+                                -Dheadless=%HEADLESS% \
+                                -Dparallel.threads=%PARALLEL_THREADS% \
+                                -Dextent.reporter.spark.out=%EXTENT_REPORT_PATH%edge-report.html
+                            """
                         }
                     }
                     post {
@@ -181,11 +181,10 @@ pipeline {
             steps {
                 echo 'Generating comprehensive test reports...'
                 script {
-                    // Generate consolidated report
-                    sh '''
-                        mvn exec:java -Dexec.mainClass="com.automation.utils.ReportGenerator" \
-                        -Dexec.args="${EXTENT_REPORT_PATH} ${TESTNG_REPORT_PATH} ${REPORT_DIR}"
-                    '''
+                    bat """
+                        mvn exec:java -Dexec.mainClass=\"com.automation.utils.ReportGenerator\" \
+                        -Dexec.args=\"%EXTENT_REPORT_PATH% %TESTNG_REPORT_PATH% %REPORT_DIR%\"
+                    """
                 }
             }
             post {
