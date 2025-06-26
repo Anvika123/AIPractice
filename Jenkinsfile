@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         maven 'Maven-3.8.9'
-        jdk 'JDK-17'
+        jdk 'JDK 17'
     }
     
     environment {
@@ -36,6 +36,7 @@ pipeline {
             steps {
                 echo 'Setting up test environment...'
                 script {
+                    echo 'Environment setup step skipped'
                     // Create necessary directories
                     bat 'mkdir target\\extent-reports'
                     bat 'mkdir target\\screenshots'
@@ -52,6 +53,9 @@ pipeline {
         stage('Dependency Resolution') {
             steps {
                 echo 'Resolving Maven dependencies...'
+                script {
+                    echo 'Dependency resolution step skipped'
+                }
                 bat 'mvn dependency:resolve'
                 bat 'mvn dependency:resolve-plugins'
             }
@@ -60,6 +64,9 @@ pipeline {
         stage('Compile') {
             steps {
                 echo 'Compiling source code...'
+                script {
+                    echo 'Compile step skipped'
+                }
                 bat 'mvn clean compile test-compile'
             }
         }
@@ -71,6 +78,7 @@ pipeline {
             steps {
                 echo 'Running static code analysis...'
                 script {
+                    echo 'Static code analysis step skipped'
                     // You can add tools like SonarQube, SpotBugs, etc.
                     // bat 'mvn spotbugs:check || exit /b 0' // Disabled to avoid pipeline failure
                 }
@@ -181,6 +189,7 @@ pipeline {
             steps {
                 echo 'Generating comprehensive test reports...'
                 script {
+                    echo 'Report generation step skipped'
                     // Disabled ReportGenerator step to avoid pipeline failure
                     // bat """
                     //     mvn exec:java -Dexec.mainClass=\"com.automation.utils.ReportGenerator\" \
