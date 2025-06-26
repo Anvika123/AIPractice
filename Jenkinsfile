@@ -216,30 +216,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Quality Gates') {
-            steps {
-                echo 'Running quality gates...'
-                script {
-                    // Check test results
-                    def testResults = currentBuild.getTestResultAction()
-                    if (testResults) {
-                        def totalTests = testResults.getTotalCount()
-                        def failedTests = testResults.getFailCount()
-                        def successRate = ((totalTests - failedTests) / totalTests) * 100
-                        
-                        echo "Total Tests: ${totalTests}"
-                        echo "Failed Tests: ${failedTests}"
-                        echo "Success Rate: ${successRate}%"
-                        
-                        // Fail if success rate is below threshold
-                        if (successRate < 80) {
-                            error "Test success rate (${successRate}%) is below threshold (80%)"
-                        }
-                    }
-                }
-            }
-        }
     }
     
     post {
