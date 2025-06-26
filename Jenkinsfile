@@ -99,14 +99,14 @@ pipeline {
                     post {
                         always {
                             publishTestResults testResultsPattern: '**/testng-results.xml'
-                            publishHTML([
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true,
-                                reportDir: 'target/extent-reports',
-                                reportFiles: 'chrome-report.html',
-                                reportName: 'Chrome Test Report'
-                            ])
+                            // publishHTML([
+                            //     allowMissing: false,
+                            //     alwaysLinkToLastBuild: true,
+                            //     keepAll: true,
+                            //     reportDir: 'target/extent-reports',
+                            //     reportFiles: 'chrome-report.html',
+                            //     reportName: 'Chrome Test Report'
+                            // ])
                         }
                     }
                 }
@@ -131,14 +131,14 @@ pipeline {
                     post {
                         always {
                             publishTestResults testResultsPattern: '**/testng-results.xml'
-                            publishHTML([
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true,
-                                reportDir: 'target/extent-reports',
-                                reportFiles: 'firefox-report.html',
-                                reportName: 'Firefox Test Report'
-                            ])
+                            // publishHTML([
+                            //     allowMissing: false,
+                            //     alwaysLinkToLastBuild: true,
+                            //     keepAll: true,
+                            //     reportDir: 'target/extent-reports',
+                            //     reportFiles: 'firefox-report.html',
+                            //     reportName: 'Firefox Test Report'
+                            // ])
                         }
                     }
                 }
@@ -163,14 +163,14 @@ pipeline {
                     post {
                         always {
                             publishTestResults testResultsPattern: '**/testng-results.xml'
-                            publishHTML([
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true,
-                                reportDir: 'target/extent-reports',
-                                reportFiles: 'edge-report.html',
-                                reportName: 'Edge Test Report'
-                            ])
+                            // publishHTML([
+                            //     allowMissing: false,
+                            //     alwaysLinkToLastBuild: true,
+                            //     keepAll: true,
+                            //     reportDir: 'target/extent-reports',
+                            //     reportFiles: 'edge-report.html',
+                            //     reportName: 'Edge Test Report'
+                            // ])
                         }
                     }
                 }
